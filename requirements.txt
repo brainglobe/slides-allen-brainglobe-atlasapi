@@ -2,4 +2,5 @@ brainglobe-atlasapi @ git+https://github.com/brainglobe/brainglobe-atlasapi.git@
 itables
 jupyter
 jupyter-cache
+matplotlib
 pandas
