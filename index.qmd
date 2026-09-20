@@ -437,8 +437,8 @@ Atlases are made up of 4 main components:
 
 ::: {.incremental}
 - Images stored as OME-Zarr files
-- Meshes stored in a precomputed format
-- Each component stored and downloaded lazily from [Amazon S3](https://open.quiltdata.com/b/brainglobe/tree/atlas/)
+- Meshes stored in the neuroglancer precomputed format
+- Each component is downloaded when needed from [Amazon S3](https://open.quiltdata.com/b/brainglobe/tree/atlas/)
 - Data is reused between atlases
 :::
 
@@ -446,28 +446,20 @@ Atlases are made up of 4 main components:
 
 ![](img/brainglobe-atlasapi_v3_structure.png){.absolute .nostretch width="70%" left="15%" top="13%"}
 
-##
+## Neuroglancer as a viewer for atlases
 
-```{=html}
-<iframe src="https://neuroglancer-demo.appspot.com/#!https://brainglobe.s3.amazonaws.com/ng_state_files/allen_mouse.json"
-        width="135%"
-        height="135%"
-        style="border:none; max-height: 180%; max-width: 200%; transform: scale(0.75); transform-origin: top left;"
-        allowfullscreen>
-</iframe>
-```
+<iframe src="https://brainglobe.info/documentation/brainglobe-atlasapi/usage/atlas-details.html" title="BrainGlobe Tutorials" style="max-height: 110%; max-width: 125%; width: 125%; height: 110%; transform: scale(0.8); transform-origin: top left;"></iframe>
 
-##
 
-```{=html}
-<iframe src="https://neuroglancer-demo.appspot.com/#!https://brainglobe.s3.amazonaws.com/ng_state_files/columbia_cuttlefish.json"
-        width="135%"
-        height="135%"
-        style="border:none; max-height: 180%; max-width: 200%; transform: scale(0.75); transform-origin: top left;"
-        allowfullscreen>
-</iframe>
-```
+## Compatibility with external sources
+- Can fetch from the reformated atlases distributed by the Allen Institute
 
+## Future directions
+- More atlases!
+  - Existing, and newly generated
+- Impoved searchability and discoverability of atlases
+- Add metadata to existing atlases
+- Utilise the transformations from OME-Zarr
 
 # Community building
 
@@ -494,20 +486,6 @@ Atlases are made up of 4 main components:
 [https://forum.image.sc/tag/brainglobe](https://forum.image.sc/tag/brainglobe)
 :::
 
-## Workshops and training
-![](img/OSSS_tutoring.jpg){.absolute .nostretch top="15%" width="40%" left="5%"}
-![](img/OSSS_working.jpg){.absolute .nostretch top="15%" width="40%" right="5%"}
-
-::: {.fragment .absolute top="70%" left="10%" width="80%" style="font-size: 0.7em; text-align: center;"}
-"My whole PhD feels doable now!"<br/> <br/>
-"Sparked a bit of a eureka moment after months of agonising over how to analyse my data!"
-:::
-
-::: {.notes}
-- Need numbers for attendees, countries etc
-- Outline the purpose of the school
-:::
-
 ## Supporting contributors
 
 <iframe src="https://brainglobe.info/community/developers/index.html" title="BrainGlobe Developer Guide" style="max-height: 110%; max-width: 125%; width: 125%; height: 100%; transform: scale(0.8); transform-origin: top left;"></iframe>
@@ -525,15 +503,6 @@ Atlases are made up of 4 main components:
 
 ::: {.footer}
 [https://brainglobe.zulipchat.com/](https://brainglobe.zulipchat.com/)
-:::
-
-## Community
-::: {.fragment}
-![](img/cumulative_engagements.png){.absolute .nostretch top="25%" left="0%" width="45%"}
-:::
-
-::: {.fragment}
-![](img/cumulative_unique_users.png){.absolute .nostretch top="25%" right="0%" width="45%"}
 :::
 
 ## External tools

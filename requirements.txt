@@ -1,3 +1,4 @@
+brainglobe-atlasapi @ git+https://github.com/brainglobe/brainglobe-atlasapi.git@allen-compatibility
 itables
 jupyter
 jupyter-cache
