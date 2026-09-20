@@ -1,2 +1,4 @@
+itables
 jupyter
 jupyter-cache
+pandas

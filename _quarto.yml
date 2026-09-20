@@ -9,11 +9,16 @@ execute:
 
 format:
   revealjs:
+    theme: [bg-light.scss]
+    logo: img/BG_logo.png
+    footer: "[https://brainglobe.info/slides-allen-brainglobe-atlasapi](https://brainglobe.info/slides-allen-brainglobe-atlasapi) | 2026-09-21"
     slide-number: c
     menu:
       numbers: true
+      useTextContentForMissingTitles: false 
+      hideMissingTitles: true
     chalkboard: true
-    scrollable: true
+    scrollable: false
     preview-links: false
     view-distance: 10
     mobile-view-distance: 10

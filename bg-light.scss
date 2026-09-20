@@ -1,0 +1,21 @@
+/*-- scss:defaults --*/
+
+$body-bg: #fff !default;
+$body-color: #4f4e4e !default;
+$link-color: #ee9040 !default;
+$mermaid-font-family: arial;
+$presentation-h1-font-size: 2.0em !default;
+$presentation-title-slide-text-align: left !default;
+/*-- scss:rules --*/
+
+.gray_link_div a {
+  color: #1E1E1E;      /* Set your desired link color */
+}
+
+.gray_link_div a:visited {
+  color: #1E1E1E;      /* Set your desired link color */
+}
+
+.gray_link_div a:hover {
+  color: #505050;      /* Set your desired link color */
+}

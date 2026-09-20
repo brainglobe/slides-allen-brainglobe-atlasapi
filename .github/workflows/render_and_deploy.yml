@@ -38,17 +38,19 @@ jobs:
       - name: Install Python dependencies with uv
         run: |
           uv pip install -r requirements.txt
-
+          
       - name: Render Quarto Project
-        env:
-          # Quarto will use the currently-activated venv's Python
-          QUARTO_PYTHON: python
         run: |
-          quarto render index.qmd
+          quarto render index.qmd --to revealjs
 
-      - name: Create .nojekyll file
+      - name: Move outputs to build folder
+        if: github.event_name == 'push' && github.ref_type == 'tag'
         run: |
+          mkdir build
+          mv index.html build/
+          mv index_files build/
           touch build/.nojekyll
+          cp -r img build/
 
       - name: Deploy
         if: github.event_name == 'push' && github.ref_type == 'tag'

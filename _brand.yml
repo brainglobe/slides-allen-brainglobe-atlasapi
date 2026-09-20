@@ -1,14 +1,14 @@
 meta:
   name:
-    short: NIU
-    full: Neuroinformatics Unit
+    short: BG
+    full: BrainGlobe
   link:
-    home: https://neuroinformatics.dev
-    github: https://github.com/neuroinformatics-unit
-    zulip: https://neuroinformatics.zulipchat.com
+    home: https://brainglobe.info
+    github: https://github.com/brainglobe
+    zulip: https://brainglobe.zulipchat.com
 
 logo:
-  medium: "img/logo_niu_light.png"
+  medium: "img/BG_logo.png"
 
 color:
   palette:
@@ -21,9 +21,9 @@ color:
   # Flip the background/foregroud colors for dark mode
   background: white
   foreground: dark-grey
-  primary: niu-green
+  primary: bg-orange
   info: blue
-  success: niu-green
+  success: bg-orange
   warning: bg-orange
 
 
