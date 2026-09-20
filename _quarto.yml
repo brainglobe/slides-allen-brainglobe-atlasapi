@@ -1,6 +1,8 @@
 project:
   type: default
   output-dir: build
+  resources:
+    - resources/brainrender.html
 
 bibliography: references.bib
 
