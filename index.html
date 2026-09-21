@@ -494,7 +494,7 @@ Igor Tatarnikov
 <section id="d-cell-detection-3" class="slide level2">
 <h2>3D cell detection</h2>
 <div class="absolute" style="top: 20%; left: 5%; width: 90%; ">
-<div id="c9874819" class="cell" data-execution_count="1">
+<div id="a5c4171a" class="cell" data-execution_count="1">
 <div class="cell-output cell-output-display">
 <script type="module">
     const { set_or_remove_dark_class } = await window._itables_2_9_1;
@@ -597,7 +597,7 @@ This is the <code>init_notebook_mode</code> cell from ITables v2.9.1<br>
 </div>
 <div class="cell-output cell-output-display">
 <!--| quarto-html-table-processing: none -->
-<table id="itables_82109f00_481d_4acd_a69a_a1e72237ed64" hidden="hidden">
+<table id="itables_4833323d_5844_481a_ac23_ebbce2b0694d" hidden="hidden">
   <tbody>
     <tr>
       <td style="vertical-align:middle; text-align:left"><a href="https://itables.org/"><svg class="main-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="64" viewbox="0 0 500 400" style="font-family: 'Droid Sans', sans-serif;">
@@ -663,7 +663,7 @@ This is the <code>init_notebook_mode</code> cell from ITables v2.9.1<br>
     </tr>
   </tbody>
 </table>
-<div id="itables_82109f00_481d_4acd_a69a_a1e72237ed64_fallback"><table style="border-collapse:collapse"><thead>    <tr style="text-align: right;">
+<div id="itables_4833323d_5844_481a_ac23_ebbce2b0694d_fallback"><table style="border-collapse:collapse"><thead>    <tr style="text-align: right;">
       <th style="border:1px solid #ddd;padding:8px"><sup><noscript><span title="JavaScript not allowed. Please trust this notebook to get interactive tables.">🔒</span></noscript><a href="https://itables.org/fallbacks/static_preview.html" title="ITables v2.9.1 static preview">ⓘ</a></sup>structure_name</th>
       <th style="border:1px solid #ddd;padding:8px">left_cell_count</th>
       <th style="border:1px solid #ddd;padding:8px">right_cell_count</th>
@@ -679,13 +679,13 @@ This is the <code>init_notebook_mode</code> cell from ITables v2.9.1<br>
 <tr><td style="border:1px solid #ddd;padding:8px">Lateral dorsal nucleus of thalamus</td><td style="border:1px solid #ddd;padding:8px">121.0</td><td style="border:1px solid #ddd;padding:8px">1.0</td><td style="border:1px solid #ddd;padding:8px">122.0</td></tr>
 <tr><td style="border:1px solid #ddd;padding:8px">Retrosplenial area, dorsal part, layer 5</td><td style="border:1px solid #ddd;padding:8px">110.0</td><td style="border:1px solid #ddd;padding:8px">0.0</td><td style="border:1px solid #ddd;padding:8px">110.0</td></tr>
 <tr><td style="border:1px solid #ddd;padding:8px">Retrosplenial area, dorsal part, layer 6a</td><td style="border:1px solid #ddd;padding:8px">89.0</td><td style="border:1px solid #ddd;padding:8px">0.0</td><td style="border:1px solid #ddd;padding:8px">89.0</td></tr>
-</tbody><tfoot><tr><td colspan="4" style="border:none;padding:8px;text-align:center">(649 more rows not shown)</td></tr></tfoot></table></div><script>document.getElementById("itables_82109f00_481d_4acd_a69a_a1e72237ed64")?.removeAttribute("hidden");document.getElementById("itables_82109f00_481d_4acd_a69a_a1e72237ed64_fallback")?.setAttribute("hidden", "hidden");</script>
+</tbody><tfoot><tr><td colspan="4" style="border:none;padding:8px;text-align:center">(649 more rows not shown)</td></tr></tfoot></table></div><script>document.getElementById("itables_4833323d_5844_481a_ac23_ebbce2b0694d")?.removeAttribute("hidden");document.getElementById("itables_4833323d_5844_481a_ac23_ebbce2b0694d_fallback")?.setAttribute("hidden", "hidden");</script>
 <script type="module">
     (async () => {
         async function init() {
             const { ITable, jQuery: $ } = await window._itables_2_9_1;
 
-            document.querySelectorAll("#itables_82109f00_481d_4acd_a69a_a1e72237ed64:not(.dataTable)").forEach(table => {
+            document.querySelectorAll("#itables_4833323d_5844_481a_ac23_ebbce2b0694d:not(.dataTable)").forEach(table => {
                 if (!(table instanceof HTMLTableElement))
                     return;
 
@@ -810,6 +810,102 @@ This is the <code>init_notebook_mode</code> cell from ITables v2.9.1<br>
 <h2>brainglobe-atlasapi V3</h2>
 <p><img data-src="img/brainglobe-atlasapi_v3_structure.png" class="absolute" style="top: 13%; left: 15%; width: 70%; "></p>
 </section>
+<section id="using-brainglobe-atlasapi" class="slide level2 smaller">
+<h2>Using brainglobe-atlasapi</h2>
+<div id="9f257b74" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="" aria-label="1"></a><span class="im">from</span> brainglobe_atlasapi <span class="im">import</span> BrainGlobeAtlas</span>
+<span id="cb1-2"><a href="" aria-label="2"></a></span>
+<span id="cb1-3"><a href="" aria-label="3"></a>atlas <span class="op">=</span> BrainGlobeAtlas(<span class="st">"allen_mouse_25um"</span>)</span>
+<span id="cb1-4"><a href="" aria-label="4"></a></span>
+<span id="cb1-5"><a href="" aria-label="5"></a><span class="bu">print</span>(atlas)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Downloading allen_mouse_25um atlas v3_0 manifest:</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Downloading terminology metadata for allen_mouse-terminology:</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Downloading coordinate space metadata for allen-adult-mouse-ccf-space:</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Downloading annotation metadata for allen_mouse-annotation:</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Downloading template metadata for allen-adult-mouse-stpt-template:</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<div class="ansi-escaped-output">
+<pre><span class="ansi-yellow-fg">╭──────────────────────────────────────────────────────────────────╮</span>
+
+<span class="ansi-yellow-fg">│</span> <span class="ansi-bright-red-fg ansi-bold">                        Allen mouse 25um                        </span> <span class="ansi-yellow-fg">│</span>
+
+<span class="ansi-yellow-fg">│</span> <span class="ansi-bold"> </span><span class="ansi-bold">            </span><span class="ansi-bold"> </span><span class="ansi-bold"> </span><span class="ansi-bold">                                                </span><span class="ansi-bold"> </span> <span class="ansi-yellow-fg">│</span>
+
+<span class="ansi-yellow-fg">│</span> <span class="ansi-bright-white-fg ansi-bold"> </span><span class="ansi-bright-white-fg ansi-bold">       name:</span><span class="ansi-bright-white-fg ansi-bold"> </span> allen_mouse <span class="ansi-white-fg">(v3.0)</span>                                <span class="ansi-yellow-fg">│</span>
+
+<span class="ansi-yellow-fg">│</span> <span class="ansi-bright-white-fg ansi-bold"> </span><span class="ansi-bright-white-fg ansi-bold">    species:</span><span class="ansi-bright-white-fg ansi-bold"> </span> <span style="font-style:italic">Mus musculus</span>                                      <span class="ansi-yellow-fg">│</span>
+
+<span class="ansi-yellow-fg">│</span> <span class="ansi-bright-white-fg ansi-bold"> </span><span class="ansi-bright-white-fg ansi-bold">   citation:</span><span class="ansi-bright-white-fg ansi-bold"> </span> Wang et al 2020,                                  <span class="ansi-yellow-fg">│</span>
+
+<span class="ansi-yellow-fg">│</span> <span class="ansi-bright-white-fg ansi-bold">              </span> https://doi.org/10.1016/j.cell.2020.04.007        <span class="ansi-yellow-fg">│</span>
+
+<span class="ansi-yellow-fg">│</span> <span class="ansi-bright-white-fg ansi-bold"> </span><span class="ansi-bright-white-fg ansi-bold">       link:</span><span class="ansi-bright-white-fg ansi-bold"> </span> http://www.brain-map.org                          <span class="ansi-yellow-fg">│</span>
+
+<span class="ansi-yellow-fg">│</span> <span class="ansi-bright-white-fg ansi-bold"> </span><span class="ansi-bright-white-fg ansi-bold">            </span><span class="ansi-bright-white-fg ansi-bold"> </span>                                                   <span class="ansi-yellow-fg">│</span>
+
+<span class="ansi-yellow-fg">│</span> <span class="ansi-bright-white-fg ansi-bold"> </span><span class="ansi-bright-white-fg ansi-bold">orientation:</span><span class="ansi-bright-white-fg ansi-bold"> </span> <span class="ansi-bold">asr</span>                                               <span class="ansi-yellow-fg">│</span>
+
+<span class="ansi-yellow-fg">│</span> <span class="ansi-bright-white-fg ansi-bold"> </span><span class="ansi-bright-white-fg ansi-bold">  symmetric:</span><span class="ansi-bright-white-fg ansi-bold"> </span> <span style="font-style:italic" class="ansi-bright-green-fg">True</span>                                              <span class="ansi-yellow-fg">│</span>
+
+<span class="ansi-yellow-fg">│</span> <span class="ansi-bright-white-fg ansi-bold"> </span><span class="ansi-bright-white-fg ansi-bold"> resolution:</span><span class="ansi-bright-white-fg ansi-bold"> </span> <span class="ansi-bold">[</span><span class="ansi-cyan-fg ansi-bold">25.0</span>, <span class="ansi-cyan-fg ansi-bold">25.0</span>, <span class="ansi-cyan-fg ansi-bold">25.0</span><span class="ansi-bold">]</span>                                <span class="ansi-yellow-fg">│</span>
+
+<span class="ansi-yellow-fg">│</span> <span class="ansi-bright-white-fg ansi-bold"> </span><span class="ansi-bright-white-fg ansi-bold">      shape:</span><span class="ansi-bright-white-fg ansi-bold"> </span> <span class="ansi-bold">[</span><span class="ansi-cyan-fg ansi-bold">528</span>, <span class="ansi-cyan-fg ansi-bold">320</span>, <span class="ansi-cyan-fg ansi-bold">456</span><span class="ansi-bold">]</span>                                   <span class="ansi-yellow-fg">│</span>
+
+<span class="ansi-yellow-fg">╰──────────────────────────────────────────────────────────────────╯</span>
+
+
+</pre>
+</div>
+</div>
+</div>
+</section>
+<section id="using-brainglobe-atlasapi-1" class="slide level2">
+<h2>Using brainglobe-atlasapi</h2>
+<div id="33964d84" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="" aria-label="1"></a>template <span class="op">=</span> atlas.template</span>
+<span id="cb7-2"><a href="" aria-label="2"></a>annotations <span class="op">=</span> atlas.annotation</span>
+<span id="cb7-3"><a href="" aria-label="3"></a></span>
+<span id="cb7-4"><a href="" aria-label="4"></a><span class="bu">print</span>(<span class="st">""</span>)</span>
+<span id="cb7-5"><a href="" aria-label="5"></a><span class="bu">print</span>(<span class="ss">f"Template type: </span><span class="sc">{</span><span class="bu">type</span>(template)<span class="sc">}</span><span class="ss">, shape: </span><span class="sc">{</span>template<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb7-6"><a href="" aria-label="6"></a><span class="bu">print</span>(<span class="ss">f"Annotation type: </span><span class="sc">{</span><span class="bu">type</span>(annotations)<span class="sc">}</span><span class="ss">, shape: </span><span class="sc">{</span>annotations<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Downloading template...</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Downloading annotations...</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Template type: &lt;class 'numpy.ndarray'&gt;, shape: (528, 320, 456)
+Annotation type: &lt;class 'numpy.ndarray'&gt;, shape: (528, 320, 456)</code></pre>
+</div>
+</div>
+</section>
+<section id="using-brainglobe-atlasapi-2" class="slide level2">
+<h2>Using brainglobe-atlasapi</h2>
+<div id="719debfa" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="" aria-label="1"></a>root_mesh <span class="op">=</span> atlas.root_mesh()</span>
+<span id="cb11-2"><a href="" aria-label="2"></a>hip_mesh <span class="op">=</span> atlas.mesh_from_structure(<span class="st">"HIP"</span>)</span>
+<span id="cb11-3"><a href="" aria-label="3"></a>root_mask <span class="op">=</span> atlas.get_structure_mask(<span class="st">"root"</span>)</span>
+<span id="cb11-4"><a href="" aria-label="4"></a></span>
+<span id="cb11-5"><a href="" aria-label="5"></a>voxel_scale <span class="op">=</span> (atlas.resolution[<span class="dv">0</span>] <span class="op">*</span> atlas.resolution[<span class="dv">1</span>] <span class="op">*</span> atlas.resolution[<span class="dv">2</span>]) <span class="op">/</span> <span class="fl">1e9</span></span>
+<span id="cb11-6"><a href="" aria-label="6"></a></span>
+<span id="cb11-7"><a href="" aria-label="7"></a><span class="bu">print</span>(root_mask.shape, root_mask.<span class="bu">sum</span>() <span class="op">*</span> voxel_scale, <span class="st">"mm cubed"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(528, 320, 456) 506.05289062500003 mm cubed</code></pre>
+</div>
+</div>
+</section>
 <section id="neuroglancer-as-a-viewer-for-atlases" class="slide level2">
 <h2>Neuroglancer as a viewer for atlases</h2>
 <iframe src="https://brainglobe.info/documentation/brainglobe-atlasapi/usage/atlas-details.html" title="BrainGlobe Tutorials" style="max-height: 110%; max-width: 125%; width: 125%; height: 110%; transform: scale(0.8); transform-origin: top left;">
@@ -817,32 +913,32 @@ This is the <code>init_notebook_mode</code> cell from ITables v2.9.1<br>
 </section>
 <section id="easier-queries-of-atlas-metadata" class="slide level2">
 <h2>Easier queries of atlas metadata</h2>
-<div id="e7af72e4" class="cell" data-execution_count="3">
+<div id="6417ee5d" class="cell" data-execution_count="6">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="index_files/figure-revealjs/cell-4-output-1.png" width="979" height="437"></p>
+<p><img data-src="index_files/figure-revealjs/cell-7-output-1.png" width="979" height="437"></p>
 </figure>
 </div>
 </div>
 </div>
 <div class="fragment">
-<div id="7f68107a" class="cell" data-execution_count="4">
+<div id="8ca48e10" class="cell" data-execution_count="7">
 <div class="cell-output cell-output-stdout">
-<pre><code>Time taken to load all atlases: 259.08 seconds
-Total disk space used: 30M</code></pre>
+<pre><code>Time taken to load all atlases: 494.36 seconds
+Total disk space used: 69M</code></pre>
 </div>
 </div>
 </div>
 </section>
 <section id="using-external-s3-remotes" class="slide level2 smaller">
 <h2>Using external S3 remotes</h2>
-<div id="0354e1fc" class="cell" data-execution_count="6">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="" aria-label="1"></a><span class="im">from</span> brainglobe_atlasapi <span class="im">import</span> BrainGlobeAtlas</span>
-<span id="cb2-2"><a href="" aria-label="2"></a></span>
-<span id="cb2-3"><a href="" aria-label="3"></a>atlas <span class="op">=</span> BrainGlobeAtlas(<span class="st">"hmba-adult-cynomolgusmacaque-homba-atlas"</span>, remote_root<span class="op">=</span><span class="st">"s3://allen-atlas-assets"</span>)</span>
-<span id="cb2-4"><a href="" aria-label="4"></a></span>
-<span id="cb2-5"><a href="" aria-label="5"></a><span class="bu">print</span>(atlas)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="c4c3dcc2" class="cell" data-execution_count="9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="" aria-label="1"></a><span class="im">from</span> brainglobe_atlasapi <span class="im">import</span> BrainGlobeAtlas</span>
+<span id="cb14-2"><a href="" aria-label="2"></a></span>
+<span id="cb14-3"><a href="" aria-label="3"></a>atlas <span class="op">=</span> BrainGlobeAtlas(<span class="st">"hmba-adult-cynomolgusmacaque-homba-atlas"</span>, remote_root<span class="op">=</span><span class="st">"s3://allen-atlas-assets"</span>)</span>
+<span id="cb14-4"><a href="" aria-label="4"></a></span>
+<span id="cb14-5"><a href="" aria-label="5"></a><span class="bu">print</span>(atlas)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <div class="ansi-escaped-output">
 <pre><span class="ansi-yellow-fg">╭──────────────────────────────────────────────────────────────────╮</span>
@@ -875,30 +971,30 @@ Total disk space used: 30M</code></pre>
 </section>
 <section id="using-external-s3-remotes-1" class="slide level2 smaller">
 <h2>Using external S3 remotes</h2>
-<div id="43e943f0" class="cell" data-execution_count="7">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="" aria-label="1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb3-2"><a href="" aria-label="2"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb3-3"><a href="" aria-label="3"></a></span>
-<span id="cb3-4"><a href="" aria-label="4"></a><span class="im">from</span> brainglobe_atlasapi <span class="im">import</span> BrainGlobeAtlas</span>
-<span id="cb3-5"><a href="" aria-label="5"></a></span>
-<span id="cb3-6"><a href="" aria-label="6"></a>atlas <span class="op">=</span> BrainGlobeAtlas(<span class="st">"hmba-adult-cynomolgusmacaque-homba-atlas"</span>, remote_root<span class="op">=</span><span class="st">"s3://allen-atlas-assets"</span>)</span>
-<span id="cb3-7"><a href="" aria-label="7"></a></span>
-<span id="cb3-8"><a href="" aria-label="8"></a>plane <span class="op">=</span> <span class="dv">280</span></span>
-<span id="cb3-9"><a href="" aria-label="9"></a></span>
-<span id="cb3-10"><a href="" aria-label="10"></a>annotation_slice <span class="op">=</span> np.ma.masked_equal(atlas.annotation[plane], <span class="dv">0</span>)</span>
-<span id="cb3-11"><a href="" aria-label="11"></a></span>
-<span id="cb3-12"><a href="" aria-label="12"></a>plt.imshow(atlas.template[plane], cmap<span class="op">=</span><span class="st">"gray"</span>)</span>
-<span id="cb3-13"><a href="" aria-label="13"></a>plt.imshow(annotation_slice, cmap<span class="op">=</span><span class="st">"tab10"</span>, alpha<span class="op">=</span><span class="fl">0.6</span>)</span>
-<span id="cb3-14"><a href="" aria-label="14"></a>plt.axis(<span class="st">"off"</span>)</span>
-<span id="cb3-15"><a href="" aria-label="15"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="6517179f" class="cell" data-execution_count="10">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="" aria-label="1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb15-2"><a href="" aria-label="2"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb15-3"><a href="" aria-label="3"></a></span>
+<span id="cb15-4"><a href="" aria-label="4"></a><span class="im">from</span> brainglobe_atlasapi <span class="im">import</span> BrainGlobeAtlas</span>
+<span id="cb15-5"><a href="" aria-label="5"></a></span>
+<span id="cb15-6"><a href="" aria-label="6"></a>atlas <span class="op">=</span> BrainGlobeAtlas(<span class="st">"hmba-adult-cynomolgusmacaque-homba-atlas"</span>, remote_root<span class="op">=</span><span class="st">"s3://allen-atlas-assets"</span>)</span>
+<span id="cb15-7"><a href="" aria-label="7"></a></span>
+<span id="cb15-8"><a href="" aria-label="8"></a>plane <span class="op">=</span> <span class="dv">280</span></span>
+<span id="cb15-9"><a href="" aria-label="9"></a></span>
+<span id="cb15-10"><a href="" aria-label="10"></a>annotation_slice <span class="op">=</span> np.ma.masked_equal(atlas.annotation[plane], <span class="dv">0</span>)</span>
+<span id="cb15-11"><a href="" aria-label="11"></a></span>
+<span id="cb15-12"><a href="" aria-label="12"></a>plt.imshow(atlas.template[plane], cmap<span class="op">=</span><span class="st">"gray"</span>)</span>
+<span id="cb15-13"><a href="" aria-label="13"></a>plt.imshow(annotation_slice, cmap<span class="op">=</span><span class="st">"tab10"</span>, alpha<span class="op">=</span><span class="fl">0.6</span>)</span>
+<span id="cb15-14"><a href="" aria-label="14"></a>plt.axis(<span class="st">"off"</span>)</span>
+<span id="cb15-15"><a href="" aria-label="15"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 
 </section>
-<section id="using-external-s3-remotes-1-output" class="slide level2 smaller output-location-slide"><h2>Using external S3 remotes</h2><div class="cell output-location-slide" data-execution_count="7">
+<section id="using-external-s3-remotes-1-output" class="slide level2 smaller output-location-slide"><h2>Using external S3 remotes</h2><div class="cell output-location-slide" data-execution_count="10">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="index_files/figure-revealjs/cell-8-output-1.png" width="254" height="389"></p>
+<p><img data-src="index_files/figure-revealjs/cell-11-output-1.png" width="254" height="389"></p>
 </figure>
 </div>
 </div>
@@ -924,7 +1020,7 @@ Total disk space used: 30M</code></pre>
 <p><br></p>
 <p>You can test the current development version that can fetch from <code>s3://allen-atlas-assets</code> by installing with:</p>
 <p><br></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource {bash} number-lines code-with-copy"><code class="sourceCode"><span id="cb4-1"><a href="" aria-label="1"></a>pip install git+https://github.com/brainglobe/brainglobe-atlasapi.git@allen-compatibility</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode numberSource {bash} number-lines code-with-copy"><code class="sourceCode"><span id="cb16-1"><a href="" aria-label="1"></a>pip install git+https://github.com/brainglobe/brainglobe-atlasapi.git@allen-compatibility</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><br></p>
 <p>Please report any issues on <a href="https://brainglobe.zulipchat.com/">Zulip</a> or <a href="https://github.com/brainglobe/brainglobe-atlasapi/issues">GitHub</a>.</p>
 </section>
