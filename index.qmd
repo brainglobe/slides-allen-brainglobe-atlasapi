@@ -390,7 +390,7 @@ Atlases in BrainGlobe are made up of 4 main components:
 ::: {.incremental}
 1. Common coordinate space - text based metadata describing the coordinate system
 2. Template - intensity based image of the brain
-3. Annotations - per-voxel annotation and meshes for each region
+3. Annotation - per-voxel annotation and meshes for each region
 4. Terminology - text based metadata linking annotations to names and parent-child relationships
 :::
 
