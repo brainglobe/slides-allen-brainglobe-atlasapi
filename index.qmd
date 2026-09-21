@@ -470,7 +470,7 @@ root_mask = atlas.get_structure_mask("root")
 
 voxel_scale = (atlas.resolution[0] * atlas.resolution[1] * atlas.resolution[2]) / 1e9
 
-print(root_mask.shape, root_mask.sum() * voxel_scale, "mm cubed")
+print(f"Root mask shape: {root_mask.shape}, volume: {root_mask.sum() * voxel_scale:.2f} mm cubed")
 ```
 
 ## Neuroglancer as a viewer for atlases
