@@ -383,7 +383,7 @@ itables.show(data, searching= True)
 
 # brainglobe-atlasapi V3
 
-## BrainGlobe atlases
+## BrainGlobe atlases {.smaller}
 
 Atlases in BrainGlobe are made up of 4 main components:
 
@@ -414,7 +414,7 @@ Atlases in BrainGlobe are made up of 4 main components:
 - Aligning with [Atlas Asset Organization](https://atlas-assets.readthedocs.io/en/latest/) spec
   - Images stored as OME-Zarr files
   - Meshes stored in the neuroglancer precomputed format
-- Each component is downloaded when needed from [Amazon S3](https://open.quiltdata.com/b/brainglobe/tree/atlas/)
+- Each component is downloaded as needed from [Amazon S3](https://open.quiltdata.com/b/brainglobe/tree/atlas/)
 - Data is reused between atlases
 :::
 
@@ -491,7 +491,7 @@ print(f"Total disk space used: {dir_size}")
 
 :::
 
-## Compatibility with compliant S3 remotes
+## Using external S3 remotes {.smaller}
 
 ```{python}
 #| echo: false
@@ -514,7 +514,7 @@ atlas = BrainGlobeAtlas("hmba-adult-cynomolgusmacaque-homba-atlas", remote_root=
 print(atlas)
 ```
 
-## Compatibility with compliant S3 remotes
+## Using external S3 remotes {.smaller}
 
 ```{python}
 #| echo: true
@@ -531,14 +531,13 @@ plane = 280
 
 annotation_slice = np.ma.masked_equal(atlas.annotation[plane], 0)
 
-plt.figure(figsize=(5, 10))
 plt.imshow(atlas.template[plane], cmap="gray")
 plt.imshow(annotation_slice, cmap="tab10", alpha=0.6)
 plt.axis("off")
 plt.show()
 ```
 
-## Compatibility with compliant S3 remotes
+## Using external S3 remotes {.smaller}
 
 <iframe src="resources/brainrender.html" title="Brainrender" style="max-height: 110%; max-width: 125%; width: 125%; height: 110%; transform: scale(0.8); transform-origin: top left;"></iframe>
 
@@ -551,9 +550,7 @@ plt.show()
   - Published and newly generated
 :::
 
-## Get involved {.smaller}
-
-We'd love your feedback and contributions!
+## We'd love your feedback and contributions!
 
 <br/>
 
