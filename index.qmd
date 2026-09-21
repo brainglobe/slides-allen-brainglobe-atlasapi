@@ -425,6 +425,15 @@ Atlases in BrainGlobe are made up of 4 main components:
 ## Using brainglobe-atlasapi {.smaller}
 
 ```{python}
+#| echo: false
+#| output: false
+
+from brainglobe_atlasapi import BrainGlobeAtlas
+
+atlas = BrainGlobeAtlas("allen_mouse_25um")
+```
+
+```{python}
 #| echo: true
 #| output: true
 
@@ -445,7 +454,6 @@ print(atlas)
 template = atlas.template
 annotations = atlas.annotation
 
-print("")
 print(f"Template type: {type(template)}, shape: {template.shape}")
 print(f"Annotation type: {type(annotations)}, shape: {annotations.shape}")
 ```
@@ -593,7 +601,7 @@ plt.show()
   - Published and newly generated
 :::
 
-## We'd love your feedback and contributions!
+## We'd love your feedback and contributions! {.smaller}
 
 <br/>
 
