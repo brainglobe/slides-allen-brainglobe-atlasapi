@@ -422,6 +422,49 @@ Atlases in BrainGlobe are made up of 4 main components:
 
 ![](img/brainglobe-atlasapi_v3_structure.png){.absolute .nostretch width="70%" left="15%" top="13%"}
 
+## Using brainglobe-atlasapi {.smaller}
+
+```{python}
+#| echo: true
+#| output: true
+
+from brainglobe_atlasapi import BrainGlobeAtlas
+
+atlas = BrainGlobeAtlas("allen_mouse_25um")
+
+print(atlas)
+```
+
+
+## Using brainglobe-atlasapi
+
+```{python}
+#| echo: true
+#| output: true
+
+template = atlas.template
+annotations = atlas.annotation
+
+print("")
+print(f"Template type: {type(template)}, shape: {template.shape}")
+print(f"Annotation type: {type(annotations)}, shape: {annotations.shape}")
+```
+
+## Using brainglobe-atlasapi
+
+```{python}
+#| echo: true
+#| output: true
+
+root_mesh = atlas.root_mesh()
+hip_mesh = atlas.mesh_from_structure("HIP")
+root_mask = atlas.get_structure_mask("root")
+
+voxel_scale = (atlas.resolution[0] * atlas.resolution[1] * atlas.resolution[2]) / 1e9
+
+print(root_mask.shape, root_mask.sum() * voxel_scale, "mm cubed")
+```
+
 ## Neuroglancer as a viewer for atlases
 
 <iframe src="https://brainglobe.info/documentation/brainglobe-atlasapi/usage/atlas-details.html" title="BrainGlobe Tutorials" style="max-height: 110%; max-width: 125%; width: 125%; height: 110%; transform: scale(0.8); transform-origin: top left;"></iframe>
