@@ -13,34 +13,6 @@ date: 2026-09-21
 - Future directions
 :::
 
-# Background
-
-##
-::: {.absolute left="0%" top="50%" width="100%" style="text-align: left; font-style: italic;"}
-Our goal at the BrainGlobe Initiative is to accelerate progress in neuroscience by providing a set of interoperable tools -- and building a community -- for computational neuroanatomy.
-:::
-
-## What was needed?
-::: {.columns}
-::: {.column .fragment fragment-index=2 style="font-size: 0.9em;"}
-A platform that enabled the community to:
-
-:::{.incremental}
-1. Build tools for whole-brain microscopy data analysis.
-2. Work with multiple species and atlases.
-3. Collaborate with each other.
-:::
-
-:::
-::: {.column style="transform: scale(0.8); transform-origin: top left;"}
-:::: {.fragment fragment-index=1 top="10%" right="0%"}
-```{=html}
-<blockquote class="twitter-tweet"><p lang="en" dir="ltr">neurotwitter, I&#39;m thinking of extending brainrender (<a href="https://t.co/ISYhPD7EhE">https://t.co/ISYhPD7EhE</a>) to atlases other than the Allen brain atlas. Does anyone know where I can download 3D atlases for the rat, drosophila and zebra fish brains?</p>&mdash; Federico Claudi (@Federico_claudi) <a href="https://twitter.com/Federico_claudi/status/1254726103945576449?ref_src=twsrc%5Etfw">April 27, 2020</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> 
-```
-::::
-:::
-:::
-
 # The BrainGlobe Initiative
 
 ## BrainGlobe Initiative {.smaller}
@@ -80,6 +52,7 @@ Modular tools that work together
 :::
 
 ## BrainGlobe Initiative
+
 ![](img/Scientific-Python-Ecosystem.png){.absolute .nostretch top="20%" left="10%" width="80%"}
 
 ## BrainGlobe atlases
@@ -451,6 +424,7 @@ Atlases are made up of 4 main components:
 <iframe src="https://brainglobe.info/documentation/brainglobe-atlasapi/usage/atlas-details.html" title="BrainGlobe Tutorials" style="max-height: 110%; max-width: 125%; width: 125%; height: 110%; transform: scale(0.8); transform-origin: top left;"></iframe>
 
 
+
 ## Compatibility with external sources {.smaller}
 
 ```{python}
@@ -490,82 +464,9 @@ plt.show()
 ## Future directions
 - More atlases!
   - Existing, and newly generated
-- Impoved searchability and discoverability of atlases
+- Improved searchability and discoverability of atlases
 - Add metadata to existing atlases
 - Utilise the transformations from OME-Zarr
-
-# Community building
-
-## Supporting users
-::: {.incremental}
-- Reduce barriers of entry
-- Provide comprehensive documentation and tutorials
-- Support users via multiple channels
-- Host workshops and training events
-:::
-
-##
-
-<iframe src="https://brainglobe.info/tutorials/index.html" title="BrainGlobe Tutorials" style="max-height: 110%; max-width: 125%; width: 125%; height: 110%; transform: scale(0.8); transform-origin: top left;"></iframe>
-
-::: {.footer}
-[https://brainglobe.info/tutorials/index.html](https://brainglobe.info/tutorials/index.html)
-:::
-
-##
-![](img/image_sc.png){.absolute .nostretch top="5%" width="85%" left="7.5%"}
-
-::: {.footer}
-[https://forum.image.sc/tag/brainglobe](https://forum.image.sc/tag/brainglobe)
-:::
-
-## Supporting contributors
-
-<iframe src="https://brainglobe.info/community/developers/index.html" title="BrainGlobe Developer Guide" style="max-height: 110%; max-width: 125%; width: 125%; height: 100%; transform: scale(0.8); transform-origin: top left;"></iframe>
-
-::: {.notes}
-- Everything is open from day one
-:::
-
-::: {.footer}
-[https://brainglobe.info/community/developers/index.html](https://brainglobe.info/community/developers/index.html)
-:::
-
-## Supporting contributors
-![](img/zulip.png){.absolute .nostretch width="80%" top="20%" left="10%"}
-
-::: {.footer}
-[https://brainglobe.zulipchat.com/](https://brainglobe.zulipchat.com/)
-:::
-
-## External tools
-::: {.fragment}
-![](img/brainglobe_external_vvasp.png){.absolute top="15%" left="5%" width="60%"}
-![](img/brainglobe_external_brainatlas.png){.absolute top="18%" left="6%" width="60%"}
-![](img/brainglobe_external_brainlocationvisualizer.png){.absolute top="21%" left="7%" width="60%"}
-![](img/brainglobe_external_brainloopsearch.png){.absolute top="24%" left="8%" width="60%"}
-![](img/brainglobe_external_brainreg3d.png){.absolute top="27%" left="9%" width="60%"}
-![](img/brainglobe_external_braintracer.png){.absolute top="30%" left="10%" width="60%"}
-![](img/brainglobe_external_brainways.png){.absolute top="33%" left="11%" width="60%"}
-![](img/brainglobe_external_clearfinder.png){.absolute top="36%" left="12%" width="60%"}
-![](img/brainglobe_external_blenderbrain.png){.absolute top="39%" left="13%" width="60%"}
-:::
-
-::: {.fragment}
-![](img/brainglobe_external_cuisto.png){.absolute top="18%" left="26%" width="60%"}
-![](img/brainglobe_external_dmcbrainmap.png){.absolute top="21%" left="27%" width="60%"}
-![](img/brainglobe_external_magellan.png){.absolute top="24%" left="28%" width="60%"}
-![](img/brainglobe_external_neuralib.png){.absolute top="27%" left="29%" width="60%"}
-![](img/brainglobe_external_neurocarto.png){.absolute top="30%" left="30%" width="60%"}
-![](img/brainglobe_external_paprica.png){.absolute top="33%" left="31%" width="60%"}
-![](img/brainglobe_external_pynutil.png){.absolute top="36%" left="32%" width="60%"}
-![](img/brainglobe_external_copernifus.png){.absolute top="39%" left="33%" width="60%"}
-![](img/brainglobe_external_abba.png){.absolute top="42%" left="34%" width="60%"}
-:::
-
-::: {.footer}
-[https://brainglobe.info/community/external-tools.html](https://brainglobe.info/community/external-tools.html)
-:::
 
 ## Acknowledgements
 <br/>
