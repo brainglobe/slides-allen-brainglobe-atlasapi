@@ -4,3 +4,4 @@ jupyter
 jupyter-cache
 matplotlib
 pandas
+seaborn
