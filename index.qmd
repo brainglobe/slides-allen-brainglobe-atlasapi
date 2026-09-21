@@ -1,14 +1,14 @@
 ---
 title: brainglobe-atlasapi
-subtitle: V3
-author: BrainGlobe
+subtitle: Working with neuroanatomical atlases in Python
+author: Igor Tatarnikov
 date: 2026-09-21
 ---
 
-## The BrainGlobe Initiative
+## Outline
 ::: {.incremental}
 - Background
-- Existing tools
+- Existing BrainGlobe tools
 - brainglobe-atlasapi V3
 - Future directions
 :::
@@ -225,6 +225,8 @@ Prairie Vole (Microtus ochrogaster)
 [Claudi, F. et al. (2020) “BrainGlobe Atlas API: a common interface for neuroanatomical atlases” JOSS, v5(54), 2668](https://doi.org/10.21105/joss.02668)
 :::
 
+# Existing tools
+
 ## Whole-brain registration
 
 ### [`brainreg`](https://github.com/brainglobe/brainreg)
@@ -383,7 +385,7 @@ itables.show(data, searching= True)
 
 ## BrainGlobe atlases
 
-Atlases are made up of 4 main components:
+Atlases in BrainGlobe are made up of 4 main components:
 
 ::: {.incremental}
 1. Common coordinate space - text based metadata describing the coordinate system
@@ -392,7 +394,7 @@ Atlases are made up of 4 main components:
 4. Terminology - text based metadata linking annotations to names and parent-child relationships
 :::
 
-## `brainglobe-atlasapi` V2
+## brainglobe-atlasapi V2
 
 ::: {.incremental}
 - Images stored as `.tiff` files
@@ -406,67 +408,150 @@ Atlases are made up of 4 main components:
 ::: {style="background: #ffffffff; width: 47%; height: 10%; margin: 0px; position: absolute; top: 83%; left: 0%"}
 :::
 
-## `brainglobe-atlasapi` V3
+## brainglobe-atlasapi V3
 
 ::: {.incremental}
-- Images stored as OME-Zarr files
-- Meshes stored in the neuroglancer precomputed format
+- Aligning with [Atlas Asset Organization](https://atlas-assets.readthedocs.io/en/latest/) spec
+  - Images stored as OME-Zarr files
+  - Meshes stored in the neuroglancer precomputed format
 - Each component is downloaded when needed from [Amazon S3](https://open.quiltdata.com/b/brainglobe/tree/atlas/)
 - Data is reused between atlases
 :::
 
-## `brainglobe-atlasapi` V3
+## brainglobe-atlasapi V3
 
 ![](img/brainglobe-atlasapi_v3_structure.png){.absolute .nostretch width="70%" left="15%" top="13%"}
+
+## 
 
 ## Neuroglancer as a viewer for atlases
 
 <iframe src="https://brainglobe.info/documentation/brainglobe-atlasapi/usage/atlas-details.html" title="BrainGlobe Tutorials" style="max-height: 110%; max-width: 125%; width: 125%; height: 110%; transform: scale(0.8); transform-origin: top left;"></iframe>
 
+## 
 
+```{python}
+#| echo: false
+#| output: false
+from time import time
 
-## Compatibility with external sources {.smaller}
+from brainglobe_atlasapi import BrainGlobeAtlas
+from brainglobe_atlasapi.list_atlases import get_all_atlases_lastversions
+
+start_time = time()
+
+atlases = get_all_atlases_lastversions()
+resolutions = []
+species = []
+
+for atlas in atlases:
+    if atlas in ["australian_mouse_15um", "azba_zfish_4um", "hoops_tawny_dragon_50um"]:
+        continue
+    atlas = BrainGlobeAtlas(atlas, check_latest=False)
+    resolutions.append(atlas.resolution[0])
+    species.append(atlas.metadata["species"])
+
+end_time = time()
+```
+
+```{python}
+import seaborn as sns
+import matplotlib.ticker as mticker
+
+sns.set_context("talk")
+sns.set_theme(style="whitegrid")
+# Create a DataFrame from the resolutions and species lists
+import pandas as pd
+df = pd.DataFrame({"Resolution": resolutions, "Species": species})
+
+# Create a swarmplot of resolutions by species, sorted by mean resolution
+order = df.groupby("Species")["Resolution"].mean().sort_values(ascending=False).index
+ax = sns.stripplot(x="Resolution", y="Species", data=df, order=order, dodge=True, color="#ee9040", edgecolor="black", linewidth=1, size=8)
+ax.set_xlabel("AP Resolution (µm)")
+ax.set_xscale("log")
+ax.xaxis.set_major_formatter(mticker.ScalarFormatter())
+```
+
+::: {.fragment}
+
+```{python}
+#| echo: false
+#| output: true
+import subprocess
+
+from brainglobe_atlasapi.config import get_brainglobe_dir
+
+def get_dir_size(path):
+    result = subprocess.run(['du', '-sh', path], capture_output=True, text=True)
+    return result.stdout.split()[0]
+
+dir_size = get_dir_size(str(get_brainglobe_dir() / "brainglobe-atlasapi"))
+
+print(f"Time taken to load all atlases: {end_time - start_time:.2f} seconds")
+print(f"Total disk space used: {dir_size}")
+```
+
+:::
+
+## Compatibility with external remotes {.smaller}
+
+```{python}
+#| echo: false
+#| output: false
+
+from brainglobe_atlasapi import BrainGlobeAtlas
+
+atlas = BrainGlobeAtlas("hmba-adult-cynomolgusmacaque-homba-atlas", remote_root="s3://allen-atlas-assets")
+atlas.annotation
+atlas.template
+```
 
 ```{python}
 #| echo: true
 #| output: true
 from brainglobe_atlasapi import BrainGlobeAtlas
 
-atlas = BrainGlobeAtlas("hmba-adult-cynomolgusmacaque-homba-atlas")
+atlas = BrainGlobeAtlas("hmba-adult-cynomolgusmacaque-homba-atlas", remote_root="s3://allen-atlas-assets")
 
 print(atlas)
 ```
 
-## Compatibility with external sources {.smaller}
+## Compatibility with external remotes {.smaller}
 
 ```{python}
 #| echo: true
 #| output: true
+#| output-location: slide
 import matplotlib.pyplot as plt
 import numpy as np
 
+from brainglobe_atlasapi import BrainGlobeAtlas
+
+atlas = BrainGlobeAtlas("hmba-adult-cynomolgusmacaque-homba-atlas", remote_root="s3://allen-atlas-assets")
+
 plane = 280
 
-annotation_slice = atlas.annotation[plane]
-annotation_masked = np.ma.masked_where(annotation_slice == 0, annotation_slice)
+annotation_slice = np.ma.masked_equal(atlas.annotation[plane], 0)
 
+plt.figure(figsize=(5, 10))
 plt.imshow(atlas.template[plane], cmap="gray")
-plt.imshow(annotation_masked, cmap="tab10", alpha=0.6)
+plt.imshow(annotation_slice, cmap="tab10", alpha=0.6)
 plt.axis("off")
 plt.show()
 ```
-
 
 ## Comptatibility with external sources {.smaller}
 
 <iframe src="resources/brainrender.html" title="Brainrender" style="max-height: 110%; max-width: 125%; width: 125%; height: 110%; transform: scale(0.8); transform-origin: top left;"></iframe>
 
 ## Future directions
-- More atlases!
-  - Existing, and newly generated
+::: {.incremental}
 - Improved searchability and discoverability of atlases
 - Add metadata to existing atlases
-- Utilise the transformations from OME-Zarr
+- Expose and utilise the extra metadata in OME-Zarr
+- More atlases!
+  - Published and newly generated
+:::
 
 ## Acknowledgements
 <br/>
@@ -491,151 +576,153 @@ Mateo Vélez-Fort<br/>Alessandro Felder<br/>Nikoloz Sirmpilatze<br/>Simon Weiler
 :::
 
 ## ![](img/BG_logo.png){height=70px style="margin-bottom: 0px; margin-top: 0px;"} [Contributors](https://brainglobe.info/people.html)
-::: {.columns .gray_link_div style="font-size: 0.4em;"}
-:::: {.column width="20%"}
-[Christian Niedworok](https://github.com/cniedwor) <br/>
-[Charly Rousseau](https://github.com/crousseau) <br/>
-[Horst Obenhaus](https://github.com/horsto) <br/>
-[Chryssanthi Tsitoura](https://github.com/chrytsi) <br/>
-[Sepiedeh Keshavarzi](https://github.com/Sepidak) <br/>
-[Mateo Vélez-Fort](https://github.com/velezmat) <br/>
-[Stephen Lenzi](https://github.com/stephenlenzi) <br/>
-[Rob Campbell](https://github.com/raacampbell) <br/>
-[Alessandro Felder](https://github.com/alessandrofelder) <br/>
-[Federico Claudi](https://github.com/FedeClaudi) <br/>
-[Luigi Petrucco](https://github.com/vigji) <br/>
-[Adam Tyson](https://github.com/adamltyson) <br/>
-[Troy Margrie](https://github.com/troymargrie) <br/>
-[Tiago Branco](https://github.com/ineuron) <br/>
-[Ruben Portugues](https://github.com/portugueslab) <br/>
-[Joe Ziminski](https://github.com/JoeZiminski) <br/>
-[Sofia Miñano](https://github.com/sfmig) <br/>
-[Niko Sirmpilatze](https://github.com/niksirbi) <br/>
-[Nicholas Del Grosso](https://github.com/nickdelgrosso) <br/>
-[Laura Porta](https://github.com/lauraporta) <br/>
-[Lee Cossell](https://github.com/lcossell) <br/>
-[Antonin Blot](https://github.com/ablot) <br/>
-[David Pérez-Suárez](https://github.com/dpshelio) <br/>
-[David Stansby](https://github.com/dstansby) <br/>
-[Will Graham](https://github.com/willGraham01) <br/>
-[Patrick Roddy](https://github.com/paddyroddy)
-::::
-
-:::: {.column width="20%"}
-[Adrien Berchet](https://github.com/adrien-berchet) <br/>
-[Mathieu Bourdenx](https://github.com/MathieuBo) <br/>
-[bkntr](https://github.com/bkntr) <br/>
-[NovaFae](https://github.com/novafae) <br/>
-[David Young](https://github.com/yoda-vid) <br/>
-[Sam Clothier](https://github.com/samclothier) <br/>
-[Gubra-ApS](https://github.com/Gubra-ApS) <br/>
-[Kailyn Fields](https://github.com/kailynkfields) <br/>
-[ramroomh](https://github.com/ramroomh) <br/>
-[Samuel Diebolt](https://github.com/sdiebolt) <br/>
-[Chris Roat](https://github.com/chrisroat) <br/>
-[Oren Amsalem](https://github.com/orena1) <br/>
-[kclamar](https://github.com/kclamar) <br/>
-[Draga Doncila Pop](https://github.com/DragaDoncila) <br/>
-[juanma9613](https://github.com/juanma9613) <br/>
-[Jules Scholler](https://github.com/JulesScholler) <br/>
-[Iaroslavna Vasylieva](https://github.com/noisysky) <br/>
-[Nicolas Peschke](https://github.com/npeschke) <br/>
-[Justin Kiggins](https://github.com/neuromusic) <br/>
-[Peter Sobolewski](https://github.com/psobolewskiPhD) <br/>
-[Simão Bolota](https://github.com/SimaoBolota-MetaCell) <br/>
-[chili-chiu](https://github.com/chili-chiu) <br/>
-[jaimergp](https://github.com/jaimergp) <br/>
-[Sebastian Lammers](https://github.com/seblammers) <br/>
-[Matt Colligan](https://github.com/m-col) <br/>
-[Paul Brodersen](https://github.com/paulbrodersen)
-::::
-
-:::: {.column width="20%"}
-[Carter Peene](https://github.com/rcpeene) <br/>
-[francesshei](https://github.com/francesshei) <br/>
-[Sean Martin](https://github.com/seankmartin) <br/>
-[Ben Dichter](https://github.com/bendichter) <br/>
-[4iar](https://github.com/4iar) <br/>
-[Marco Musy](https://github.com/marcomusy) <br/>
-[Anna Medyukhina](https://github.com/amedyukhina) <br/>
-[stegiopast](https://github.com/stegiopast) <br/>
-[EmanPaoli](https://github.com/EmanPaoli) <br/>
-[lidakanari](https://github.com/lidakanari) <br/>
-[Alexis Arnaudon](https://github.com/arnaudon) <br/>
-[Ziyang Liu](https://github.com/liu-ziyang) <br/>
-[Philip Shamash](https://github.com/philshams) <br/>
-[koushik-ms](https://github.com/koushik-ms) <br/>
-[Harald Reingruber](https://github.com/haraldreingruber) <br/>
-[Emily Jane Dennis](https://github.com/emilyjanedennis) <br/>
-[Peak](https://github.com/pattarika) <br/>
-[Maximilian Blacher](https://github.com/3ng7n33r) <br/>
-[Hernando Martinez Vergara](https://github.com/HernandoMV) <br/>
-[Estelle](https://github.com/enassar) <br/>
-[nicole-vissers](https://github.com/nicole-vissers) <br/>
-[GD](https://github.com/GDoumou) <br/>
-[Michael Kunst](https://github.com/mkunst23) <br/>
-[Estelle Nassar](https://github.com/estellenassar) <br/>
-[Sara Mederos](https://github.com/SaraMederos) <br/>
-[Igor Tatarnikov](https://github.com/IgorTatarnikov)
-::::
-
-:::: {.column width="20%"}
-[Viktor Plattner](https://github.com/viktorpm) <br/>
-[Carlo Castoldi](https://github.com/carlocastoldi) <br/>
-[Jingjie Li](https://github.com/jingjie-li) <br/>
-[Guillaume Le Goc](https://github.com/GuillaumeLeGoc) <br/>
-[Harry Carey](https://github.com/PolarBean) <br/>
-[Matt Einhorn](https://github.com/matham) <br/>
-[Kimberly Meechan](https://github.com/K-Meech) <br/>
-[Robert Kozol](https://github.com/Robkozol) <br/>
-[Roberto](https://github.com/RobertoDF) <br/>
-[Axel Bisi](https://github.com/abisi) <br/>
-[Jung Woo Kim](https://github.com/kjungwoo5) <br/>
-[Saima Abdus](https://github.com/saimaabdus19) <br/>
-[Saarah Hussain](https://github.com/saarah815/) <br/>
-[Sacha Hadaway-Andreae](https://github.com/sacha091) <br/>
-[Presa](https://github.com/zenWai) <br/>
-[Henry Crosswell](https://github.com/HenryCrosswell) <br/>
-[Nischit Kumar](https://github.com/nischitkumar) <br/>
-[Kirato Yoshihara](https://github.com/kira1228) <br/>
-[Leonard Schwigon](https://orcid.org/0009-0004-1453-2638) <br/>
-[Dinora Abdulazhanova](https://uol.de/ibu/neurosensorik/team/dinora-abdulazhanova) <br/>
-[Katrin Haase](https://orcid.org/0000-0002-1365-2548) <br/>
-[Dominik Heyers](https://orcid.org/0000-0002-2831-6985) <br/>
-[Isabelle Museliak](https://orcid.org/0000-0001-7242-3123) <br/>
-[Henrik Mouritsen](https://orcid.org/0000-0001-7082-4839) <br/>
-[Simon Weiler](https://github.com/simonweiler) <br/>
-[Stella Prins](https://github.com/stellaprins)
-::::
-
-:::: {.column width="20%"}
-[Richard Dushime](https://github.com/richarddushime) <br/>
-[Miguel Xochicale](https://github.com/mxochicale) <br/>
-[M S P](https://github.com/msp99000) <br/>
-[Abdul Samad](https://github.com/samadpls) <br/>
-[Prisha Sharma](https://github.com/parharti) <br/>
-[Farida Yusuf](https://github.com/frdysf) <br/>
-[Anshu Saini](https://github.com/0Anshu1) <br/>
-[Menna1812](https://github.com/Menna1812) <br/>
-[ayush2281](https://github.com/ayush2281) <br/>
-[BethCr](https://github.com/BethCr) <br/>
-[Swapnaneel Patra](https://github.com/thisisrick25) <br/>
-[Xiaoyu Deng](https://github.com/X-Deng) <br/>
-[DwarvesEatRocks](https://github.com/DwarvesEatRocks) <br/>
-[DPWebster](https://github.com/DPWebster) <br/>
-[Conrad](https://github.com/conradRz) <br/>
-[pranav33317](https://github.com/pranav33317) <br/>
-[Biswanath Saha](https://github.com/Elsword016) <br/>
-[Federico F.](https://github.com/Fede2717) <br/>
-[Tim Monko](https://github.com/TimMonko) <br/>
-[Kaixiang Shuai](https://github.com/Skxsmy) <br/>
-[Giulia Paci](https://github.com/giuliapaci) <br/>
-[Marco Dalla Vecchia](https://github.com/marcodallavecchia) <br/>
-[Pavel Vychyk](https://github.com/p-vychik) <br/>
-[Ishrat Zaman](https://github.com/ishratz25) <br/>
-[Asma Bashir](https://github.com/DrABashir) <br/>
-[Fatma S. Elsharkawy](https://github.com/FatmaElsharkawy)
-::::
+::: {.gray_link_div style="column-count: 6; column-gap: 1.2em; column-fill: balance; font-size: 0.4em; text-align: left;"}
+<div>[Christian Niedworok](https://github.com/cniedwor)</div>
+<div>[Charly Rousseau](https://github.com/crousseau)</div>
+<div>[Horst Obenhaus](https://github.com/horsto)</div>
+<div>[Chryssanthi Tsitoura](https://github.com/chrytsi)</div>
+<div>[Sepiedeh Keshavarzi](https://github.com/Sepidak)</div>
+<div>[Mateo Vélez-Fort](https://github.com/velezmat)</div>
+<div>[Stephen Lenzi](https://github.com/stephenlenzi)</div>
+<div>[Rob Campbell](https://github.com/raacampbell)</div>
+<div>[Alessandro Felder](https://github.com/alessandrofelder)</div>
+<div>[Federico Claudi](https://github.com/FedeClaudi)</div>
+<div>[Luigi Petrucco](https://github.com/vigji)</div>
+<div>[Adam Tyson](https://github.com/adamltyson)</div>
+<div>[Troy Margrie](https://github.com/troymargrie)</div>
+<div>[Tiago Branco](https://github.com/ineuron)</div>
+<div>[Ruben Portugues](https://github.com/portugueslab)</div>
+<div>[Joe Ziminski](https://github.com/JoeZiminski)</div>
+<div>[Sofia Miñano](https://github.com/sfmig)</div>
+<div>[Niko Sirmpilatze](https://github.com/niksirbi)</div>
+<div>[Nicholas Del Grosso](https://github.com/nickdelgrosso)</div>
+<div>[Laura Porta](https://github.com/lauraporta)</div>
+<div>[Lee Cossell](https://github.com/lcossell)</div>
+<div>[Antonin Blot](https://github.com/ablot)</div>
+<div>[David Pérez-Suárez](https://github.com/dpshelio)</div>
+<div>[David Stansby](https://github.com/dstansby)</div>
+<div>[Will Graham](https://github.com/willGraham01)</div>
+<div>[Patrick Roddy](https://github.com/paddyroddy)</div>
+<div>[Adrien Berchet](https://github.com/adrien-berchet)</div>
+<div>[Mathieu Bourdenx](https://github.com/MathieuBo)</div>
+<div>[bkntr](https://github.com/bkntr)</div>
+<div>[NovaFae](https://github.com/novafae)</div>
+<div>[David Young](https://github.com/yoda-vid)</div>
+<div>[Sam Clothier](https://github.com/samclothier)</div>
+<div>[Gubra-ApS](https://github.com/Gubra-ApS)</div>
+<div>[Kailyn Fields](https://github.com/kailynkfields)</div>
+<div>[Samuel Diebolt](https://github.com/sdiebolt)</div>
+<div>[Chris Roat](https://github.com/chrisroat)</div>
+<div>[Oren Amsalem](https://github.com/orena1)</div>
+<div>[kclamar](https://github.com/kclamar)</div>
+<div>[Draga Doncila Pop](https://github.com/DragaDoncila)</div>
+<div>[juanma9613](https://github.com/juanma9613)</div>
+<div>[Jules Scholler](https://github.com/JulesScholler)</div>
+<div>[Iaroslavna Vasylieva](https://github.com/noisysky)</div>
+<div>[Nicolas Peschke](https://github.com/npeschke)</div>
+<div>[Justin Kiggins](https://github.com/neuromusic)</div>
+<div>[Peter Sobolewski](https://github.com/psobolewskiPhD)</div>
+<div>[Simão Bolota](https://github.com/SimaoBolota-MetaCell)</div>
+<div>[chili-chiu](https://github.com/chili-chiu)</div>
+<div>[jaimergp](https://github.com/jaimergp)</div>
+<div>[Sebastian Lammers](https://github.com/seblammers)</div>
+<div>[Matt Colligan](https://github.com/m-col)</div>
+<div>[Paul Brodersen](https://github.com/paulbrodersen)</div>
+<div>[Carter Peene](https://github.com/rcpeene)</div>
+<div>[francesshei](https://github.com/francesshei)</div>
+<div>[Sean Martin](https://github.com/seankmartin)</div>
+<div>[Ben Dichter](https://github.com/bendichter)</div>
+<div>[4iar](https://github.com/4iar)</div>
+<div>[Marco Musy](https://github.com/marcomusy)</div>
+<div>[Anna Medyukhina](https://github.com/amedyukhina)</div>
+<div>[stegiopast](https://github.com/stegiopast)</div>
+<div>[EmanPaoli](https://github.com/EmanPaoli)</div>
+<div>[lidakanari](https://github.com/lidakanari)</div>
+<div>[Alexis Arnaudon](https://github.com/arnaudon)</div>
+<div>[Ziyang Liu](https://github.com/liu-ziyang)</div>
+<div>[Philip Shamash](https://github.com/philshams)</div>
+<div>[koushik-ms](https://github.com/koushik-ms)</div>
+<div>[Harald Reingruber](https://github.com/haraldreingruber)</div>
+<div>[Emily Jane Dennis](https://github.com/emilyjanedennis)</div>
+<div>[Peak](https://github.com/pattarika)</div>
+<div>[Maximilian Blacher](https://github.com/3ng7n33r)</div>
+<div>[Hernando Martinez Vergara](https://github.com/HernandoMV)</div>
+<div>[Estelle](https://github.com/enassar)</div>
+<div>[nicole-vissers](https://github.com/nicole-vissers)</div>
+<div>[GD](https://github.com/GDoumou)</div>
+<div>[Michael Kunst](https://github.com/mkunst23)</div>
+<div>[Estelle Nassar](https://github.com/estellenassar)</div>
+<div>[Sara Mederos](https://github.com/SaraMederos)</div>
+<div>[Igor Tatarnikov](https://github.com/IgorTatarnikov)</div>
+<div>[Viktor Plattner](https://github.com/viktorpm)</div>
+<div>[Carlo Castoldi](https://github.com/carlocastoldi)</div>
+<div>[Jingjie Li](https://github.com/jingjie-li)</div>
+<div>[Guillaume Le Goc](https://github.com/GuillaumeLeGoc)</div>
+<div>[Harry Carey](https://github.com/PolarBean)</div>
+<div>[Matt Einhorn](https://github.com/matham)</div>
+<div>[Kimberly Meechan](https://github.com/K-Meech)</div>
+<div>[Robert Kozol](https://github.com/Robkozol)</div>
+<div>[Roberto](https://github.com/RobertoDF)</div>
+<div>[Axel Bisi](https://github.com/abisi)</div>
+<div>[Jung Woo Kim](https://github.com/kjungwoo5)</div>
+<div>[Saima Abdus](https://github.com/saimaabdus19)</div>
+<div>[Saarah Hussain](https://github.com/saarah815/)</div>
+<div>[Sacha Hadaway-Andreae](https://github.com/sacha091)</div>
+<div>[Presa](https://github.com/zenWai)</div>
+<div>[Henry Crosswell](https://github.com/HenryCrosswell)</div>
+<div>[Nischit Kumar](https://github.com/nischitkumar)</div>
+<div>[Kirato Yoshihara](https://github.com/kiratoyoshihara)</div>
+<div>[Leonard Schwigon](https://orcid.org/0009-0004-1453-2638)</div>
+<div>[Dinora Abdulazhanova](https://uol.de/ibu/neurosensorik/team/dinora-abdulazhanova)</div>
+<div>[Katrin Haase](https://orcid.org/0000-0002-1365-2548)</div>
+<div>[Dominik Heyers](https://orcid.org/0000-0002-2831-6985)</div>
+<div>[Isabelle Museliak](https://orcid.org/0000-0001-7242-3123)</div>
+<div>[Henrik Mouritsen](https://orcid.org/0000-0001-7082-4839)</div>
+<div>[Simon Weiler](https://github.com/simonweiler)</div>
+<div>[Stella Prins](https://github.com/stellaprins)</div>
+<div>[Richard Dushime](https://github.com/richarddushime)</div>
+<div>[Miguel Xochicale](https://github.com/mxochicale)</div>
+<div>[M S P](https://github.com/msp99000)</div>
+<div>[Abdul Samad](https://github.com/samadpls)</div>
+<div>[Prisha Sharma](https://github.com/parharti)</div>
+<div>[Farida Yusuf](https://github.com/frdysf)</div>
+<div>[Anshu Saini](https://github.com/0Anshu1)</div>
+<div>[Menna1812](https://github.com/Menna1812)</div>
+<div>[ayush2281](https://github.com/ayush2281)</div>
+<div>[BethCr](https://github.com/BethCr)</div>
+<div>[Swapnaneel Patra](https://github.com/thisisrick25)</div>
+<div>[Xiaoyu Deng](https://github.com/X-Deng)</div>
+<div>[DwarvesEatRocks](https://github.com/DwarvesEatRocks)</div>
+<div>[DPWebster](https://github.com/DPWebster)</div>
+<div>[Conrad](https://github.com/conradRz)</div>
+<div>[pranav33317](https://github.com/pranav33317)</div>
+<div>[Biswanath Saha](https://github.com/Elsword016)</div>
+<div>[Federico F.](https://github.com/Fede2717)</div>
+<div>[Tim Monko](https://github.com/TimMonko)</div>
+<div>[Kaixiang Shuai](https://github.com/Skxsmy)</div>
+<div>[Giulia Paci](https://github.com/giuliapaci)</div>
+<div>[Marco Dalla Vecchia](https://github.com/marcodallavecchia)</div>
+<div>[Pavel Vychyk](https://github.com/p-vychik)</div>
+<div>[Ishrat Zaman](https://github.com/ishratz25)</div>
+<div>[Fatma S. Elsharkawy](https://github.com/FatmaElsharkawy)</div>
+<div>[Chang Huan Lo](https://github.com/lochhh)</div>
+<div>[Pascal Malkemper](https://github.com/Malkemperlab)</div>
+<div>[Alireza Saeedi](https://orcid.org/0000-0003-3728-5620)</div>
+<div>[Nasibeh Amini](https://orcid.org/0009-0000-4417-9522)</div>
+<div>[Aref hossein Akhlaghi](https://orcid.org/0009-0002-7553-9601)</div>
+<div>[Li Zhang](https://orcid.org/0000-0003-1637-2522)</div>
+<div>[Leoni-Marie Webb](https://www.linkedin.com/in/leoni-marie-webb-b87504251)</div>
+<div>[Nishanth B](https://github.com/n1shanthb)</div>
+<div>[Asma Bashir](https://github.com/DrABashir)</div>
+<div>[Ardavan Shahrabi](https://github.com/a-shahrabi)</div>
+<div>[Varun Singh](https://github.com/AlgoFoe)</div>
+<div>[Harshdip Saha](https://github.com/HARSHDIPSAHA)</div>
+<div>[sid-42-d](https://github.com/sid-42-d)</div>
+<div>[James Rowland](https://github.com/neuromantic99)</div>
+<div>[Kavyashah067](https://github.com/Kavyashah067)</div>
+<div>[AdityaGupta716](https://github.com/AdityaGupta716)</div>
+<div>[Luigi Meola](https://github.com/git-gigi)</div>
+<div>[SaraPugliese6](https://github.com/SaraPugliese6)</div>
 :::
 
 ::: {.footer}

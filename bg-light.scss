@@ -19,3 +19,7 @@ $presentation-title-slide-text-align: left !default;
 .gray_link_div a:hover {
   color: #505050;      /* Set your desired link color */
 }
+
+.gray_link_div div {
+  break-inside: avoid;
+}
