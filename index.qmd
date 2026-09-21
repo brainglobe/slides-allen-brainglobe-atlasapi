@@ -55,7 +55,7 @@ Modular tools that work together
 
 ![](img/Scientific-Python-Ecosystem.png){.absolute .nostretch top="20%" left="10%" width="80%"}
 
-## BrainGlobe atlases
+## BrainGlobe atlases {data-menu-title="BrainGlobe atlases: the fragmentation problem"}
 
 Problem - the data analysis tools are fragmented
 
@@ -70,7 +70,7 @@ Problem - the data analysis tools are fragmented
 [Claudi, F. et al. (2020) “BrainGlobe Atlas API: a common interface for neuroanatomical atlases” JOSS, v5(54), 2668](https://doi.org/10.21105/joss.02668)
 :::
 
-## BrainGlobe atlases
+## BrainGlobe atlases {data-menu-title="BrainGlobe atlases: overview"}
 
 ### [brainglobe-atlasapi](https://github.com/brainglobe/brainglobe-atlasapi)
 
@@ -93,7 +93,7 @@ Problem - the data analysis tools are fragmented
 ::: {.column .fragment width="50%" style="text-align: center; font-size: 0.7em;"}
 <br/>
 
-![](img/atlas_slices/allen_mouse_10um.png){.nostretch width="80%"} 
+![](img/atlas_slices/allen_mouse_10um.png){.nostretch width="80%"}
 
 Allen Mouse Brain CCF
 
@@ -422,13 +422,11 @@ Atlases in BrainGlobe are made up of 4 main components:
 
 ![](img/brainglobe-atlasapi_v3_structure.png){.absolute .nostretch width="70%" left="15%" top="13%"}
 
-## 
-
 ## Neuroglancer as a viewer for atlases
 
 <iframe src="https://brainglobe.info/documentation/brainglobe-atlasapi/usage/atlas-details.html" title="BrainGlobe Tutorials" style="max-height: 110%; max-width: 125%; width: 125%; height: 110%; transform: scale(0.8); transform-origin: top left;"></iframe>
 
-## 
+## Easier queries of atlas metadata
 
 ```{python}
 #| echo: false
@@ -493,7 +491,7 @@ print(f"Total disk space used: {dir_size}")
 
 :::
 
-## Compatibility with external remotes {.smaller}
+## Compatibility with compliant S3 remotes
 
 ```{python}
 #| echo: false
@@ -516,7 +514,7 @@ atlas = BrainGlobeAtlas("hmba-adult-cynomolgusmacaque-homba-atlas", remote_root=
 print(atlas)
 ```
 
-## Compatibility with external remotes {.smaller}
+## Compatibility with compliant S3 remotes
 
 ```{python}
 #| echo: true
@@ -540,7 +538,7 @@ plt.axis("off")
 plt.show()
 ```
 
-## Comptatibility with external sources {.smaller}
+## Compatibility with compliant S3 remotes
 
 <iframe src="resources/brainrender.html" title="Brainrender" style="max-height: 110%; max-width: 125%; width: 125%; height: 110%; transform: scale(0.8); transform-origin: top left;"></iframe>
 
@@ -552,6 +550,24 @@ plt.show()
 - More atlases!
   - Published and newly generated
 :::
+
+## Get involved {.smaller}
+
+We'd love your feedback and contributions!
+
+<br/>
+
+You can test the current development version that can fetch from `s3://allen-atlas-assets` by installing with:
+
+<br/>
+
+```{bash}
+pip install git+https://github.com/brainglobe/brainglobe-atlasapi.git@allen-compatibility
+```
+
+<br/>
+
+Please report any issues on [Zulip](https://brainglobe.zulipchat.com/) or [GitHub](https://github.com/brainglobe/brainglobe-atlasapi/issues).
 
 ## Acknowledgements
 <br/>
